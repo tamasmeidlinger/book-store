@@ -1,56 +1,47 @@
 import AppSidebar from "@/components/sidebar-components/AppSidebar";
 import { ShoppingCart, Heart, CircleUser } from "lucide-react";
-import Image from "next/image";
 import BlurText from "@/components/react-bits/blur-text";
+import BestSellers from "@/components/best-sellers/best-sellers";
+import Image from "next/image";
 
 function Home() {
   return (
     <>
-      <header className="border border-black flex p-3 justify-between">
-        <div className="flex gap-3">
+      <header className="border-b-sidebar-ring flex py-4 px-5 justify-between">
+        <div className="flex gap-5">
           <AppSidebar />
-          <h1 className="font-bold text-lg">BookStore</h1>
+          <h1 className="font-bold text-2xl">BookStore</h1>
         </div>
-        <div className="flex gap-3">
-          <Heart />
-          <ShoppingCart />
-          <CircleUser />
+        <div className="flex gap-5">
+          <Heart size={29} />
+          <ShoppingCart size={29} />
+          <CircleUser size={29} />
         </div>
       </header>
-      <main className="max-w-4xl mx-auto lg:shadow">
-        <div className="grid grid-cols-1 gap-2 justify-items-center sm:place-items-center px-8 sm:grid-cols-2 sm:pt-7">
-          <div className="w-75 flex flex-col justify-center items-center sm:items-start mb-7 mt-6">
+      <main className="max-w-7xl mx-auto flex flex-col items-center">
+        <div className="grid grid-cols-1 gap-2 justify-items-center sm:place-items-center px-8 sm:grid-cols-2 sm:pt-7 max-w-6xl w-full">
+          <div className="w-75 lg:w-80 flex flex-col justify-center items-center sm:items-start mb-7 mt-6">
             <BlurText
               text="Welcome To"
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-3xl"
+              className="text-4xl lg:text-5xl"
             />
             <BlurText
               text="BookStore"
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-5xl mb-2"
+              className="text-6xl mb-2 lg:text-7xl"
               startDelay={500}
             />
-            <p className="text-lg font-sans leading-6 text-center sm:text-left">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui
-              veniam impedit eligendi ut, fugiat tempora harum animi et odio
-              esse!
-            </p>
           </div>
-          <div className="rounded-md w-75 h-75 overflow-hidden relative">
-            <Image
-              src="/cozy-book2.jpg"
-              alt="cozy picture of book"
-              fill
-              className="object-cover object-center hidden sm:block"
-            />
+          <div className="w-75 h-75 lg:w-85 lg:h-85 content-center relative">
+            <Image src="/books1.svg" alt="books" fill />
           </div>
         </div>
-        <div></div>
+        <BestSellers />
       </main>
     </>
   );

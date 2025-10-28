@@ -17,12 +17,12 @@ function AppSidebar() {
     <>
       <Sheet>
         <SheetTrigger>
-          <Menu />
+          <Menu size={29} />
         </SheetTrigger>
 
-        <SheetContent side="left">
+        <SheetContent className="pt-1" side="left">
           <SheetHeader>
-            <SheetTitle className="font-bold">BookStore</SheetTitle>
+            <SheetTitle className="font-bold text-2xl">BookStore</SheetTitle>
             <SheetClose />
           </SheetHeader>
           <MenuSections />
