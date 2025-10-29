@@ -1,5 +1,3 @@
-import AppSidebar from "@/components/sidebar-components/AppSidebar";
-import { ShoppingCart, Heart, CircleUser } from "lucide-react";
 import BlurText from "@/components/react-bits/blur-text";
 import BestSellers from "@/components/best-sellers/best-sellers";
 import Image from "next/image";
@@ -7,19 +5,8 @@ import Image from "next/image";
 function Home() {
   return (
     <>
-      <header className="border-b-sidebar-ring flex py-4 px-5 justify-between">
-        <div className="flex gap-5">
-          <AppSidebar />
-          <h1 className="font-bold text-2xl">BookStore</h1>
-        </div>
-        <div className="flex gap-5">
-          <Heart size={29} />
-          <ShoppingCart size={29} />
-          <CircleUser size={29} />
-        </div>
-      </header>
       <main className="max-w-7xl mx-auto flex flex-col items-center">
-        <div className="grid grid-cols-1 gap-2 justify-items-center sm:place-items-center px-8 sm:grid-cols-2 sm:pt-7 max-w-6xl w-full">
+        <div className="grid grid-cols-1 gap-2 justify-items-center sm:place-items-center px-8 sm:grid-cols-2 sm:pt-10 max-w-6xl w-full">
           <div className="w-75 lg:w-80 flex flex-col justify-center items-center sm:items-start mb-7 mt-6">
             <BlurText
               text="Welcome To"
