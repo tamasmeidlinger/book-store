@@ -27,13 +27,18 @@ interface BookInfo {
   author: string;
   image_src: string;
   description: string;
+  price: number;
+  format: string;
+  publisher: string;
+  publication_date: string;
+  pages: number;
 }
 
 async function getBook(bookid: string) {
   try {
     const book = await sql<
       BookInfo[]
-    >`SELECT title, author, image_src, description FROM books WHERE id = ${bookid}`;
+    >`SELECT title, author, image_src, description, price, format, publisher, publication_date, pages FROM books WHERE id = ${bookid}`;
     return book[0];
   } catch (err) {
     console.error(err);
