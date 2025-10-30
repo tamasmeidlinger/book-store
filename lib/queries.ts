@@ -46,4 +46,22 @@ async function getBook(bookid: string) {
   }
 }
 
+interface FilteredBooks {
+  title: string;
+  author: string;
+  image_src: string;
+  id: string;
+}
+
+export async function filterBooks(category: string) {
+  try {
+    const filteredBooks = sql<
+      FilteredBooks[]
+    >`SELECT title, author, image_src, id FROM books WHERE genre =${category}`;
+    return filteredBooks;
+  } catch {
+    return null;
+  }
+}
+
 export { getBestSellers, getBook };
