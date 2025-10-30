@@ -1,6 +1,13 @@
-import { bestSellers } from "@/lib/placeholder-data";
+import { getBestSellers } from "@/lib/queries";
 import Image from "next/image";
-function BestSellers() {
+import Link from "next/link";
+
+async function BestSellers(): Promise<React.ReactElement | null> {
+  const bestSellers = await getBestSellers();
+
+  if (!bestSellers) {
+    return <p>Something went wrong</p>;
+  }
   return (
     <div className="w-full flex flex-col">
       <h2 className="ml-3 text-3xl font-bold">Best Sellers</h2>
@@ -12,12 +19,14 @@ function BestSellers() {
           >
             <div className="shadow-lg w-full h-[80%] self-center mb-3 relative px-2 py-6 dark:border dark:border-secondary">
               <div className="relative w-full h-full">
-                <Image
-                  src={book.src}
-                  alt="cover"
-                  fill
-                  className="object-contain"
-                />
+                <Link href={`/book/${book.id}`}>
+                  <Image
+                    src={book.image_src}
+                    alt="cover"
+                    fill
+                    className="object-contain"
+                  />
+                </Link>
               </div>
             </div>
             <div className="w-[80%]">

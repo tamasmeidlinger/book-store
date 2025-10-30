@@ -1,20 +1,18 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { bestSellers } from "@/lib/placeholder-data";
+import { getBook } from "@/lib/queries";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Plus, Bookmark } from "lucide-react";
 
-function Book() {
-  const searchParams = useSearchParams();
-  const bookId = searchParams.get("bookid");
+type BookPageProps = {
+  params: Promise<{ bookId: string }>;
+};
 
-  const book = bestSellers.find((b) => b.id.toString() === bookId);
-
+async function Book({ params }: BookPageProps) {
+  const { bookId } = await params;
+  const book = await getBook(bookId);
   if (!book) {
-    return <h1>No book found</h1>;
+    return <h1>Failed to query database</h1>;
   }
-
   return (
     <div className="flex justify-center px-4 py-22">
       <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 max-w-5xl gap-6 w-full">
@@ -30,7 +28,7 @@ function Book() {
           <div className="border-2 w-80 h-100 p-3 sm:w-full">
             <div className="relative w-full h-full">
               <Image
-                src={book.src}
+                src={book.image_src}
                 alt="cover"
                 fill
                 className="object-contain"
