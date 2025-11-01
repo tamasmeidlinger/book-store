@@ -14,10 +14,10 @@ async function BestSellers(): Promise<React.ReactElement | null> {
       <div className="flex gap-2 h-100 w-full overflow-x-auto flex-nowrap p-3 scroll-smooth scrollbar [scrollbar-width:none]">
         {bestSellers.map((book, index) => (
           <div
-            className="flex flex-col shrink-0 w-70 h-100 relative p-3"
+            className="flex flex-col shrink-0 w-70 h-full relative p-3"
             key={`${index}${book.title}`}
           >
-            <div className="shadow-lg w-full h-70 self-center mb-3 relative px-2 py-6 dark:border dark:border-secondary">
+            <div className="shadow-lg w-full h-[80%] self-center mb-3 relative px-2 py-6 dark:border dark:border-secondary">
               <div className="relative w-full h-full">
                 <Link href={`/book/${book.id}`}>
                   <Image
@@ -29,7 +29,7 @@ async function BestSellers(): Promise<React.ReactElement | null> {
                 </Link>
               </div>
             </div>
-            <div className="w-[90%] h-20 grid grid-cols-1 grid-rows-2">
+            <div className="w-[80%]">
               <h3 className="font-bold text-primary leading-tight mb-2">
                 {book.title}
               </h3>

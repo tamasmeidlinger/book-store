@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 
 import MenuSections from "./MenuSections";
 import { ModeToggle } from "../theme-swticher";
+import Link from "next/link";
 
 function AppSidebar() {
   return (
@@ -22,7 +23,11 @@ function AppSidebar() {
 
         <SheetContent className="pt-1" side="left">
           <SheetHeader>
-            <SheetTitle className="font-bold text-2xl">BookStore</SheetTitle>
+            <SheetTitle className="font-bold text-2xl">
+              <Link href="/">
+                <SheetClose>BookStore</SheetClose>
+              </Link>
+            </SheetTitle>
             <SheetClose />
           </SheetHeader>
           <MenuSections />

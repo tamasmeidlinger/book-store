@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import AppSidebar from "@/components/sidebar-components/AppSidebar";
 import { ShoppingCart, Heart, CircleUser } from "lucide-react";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,9 @@ export default function RootLayout({
           <header className="border-b-sidebar-ring flex py-4 px-5 justify-between fixed w-full z-50 top-0 left-0 bg-background">
             <div className="flex gap-5">
               <AppSidebar />
-              <h1 className="font-bold text-2xl">BookStore</h1>
+              <h1 className="font-bold text-2xl">
+                <Link href="/">BookStore</Link>
+              </h1>
             </div>
             <div className="flex gap-5">
               <Heart size={29} />
