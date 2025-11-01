@@ -88,9 +88,23 @@ interface FilteredBooks {
 
 export async function filterBooks(category: string) {
   try {
-    const filteredBooks = sql<
-      FilteredBooks[]
-    >`SELECT title, author, image_src, id FROM books WHERE genre =${category}`;
+    const filteredBooks = sql<FilteredBooks[]>`SELECT title.book_title AS title,
+author.name AS author,
+image.src AS image_src,
+book.id
+FROM book
+JOIN title
+ON title.id = book.title_id
+JOIN author
+ON author.id = book.author_id
+JOIN image
+ON image.id = book.image_id
+JOIN book_subgenre
+ON book_subgenre.book_id = book.id
+JOIN subgenre
+ON subgenre.id = book_subgenre.subgenre_id
+WHERE subgenre.name LIKE ${category};
+`;
     return filteredBooks;
   } catch {
     return null;

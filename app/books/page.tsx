@@ -9,7 +9,7 @@ async function Products({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const params = await searchParams;
-  const category = params.category ?? "";
+  const category = params.category ?? "%";
   const books = await filterBooks(category);
   if (!books) {
     return <p>No books</p>;
