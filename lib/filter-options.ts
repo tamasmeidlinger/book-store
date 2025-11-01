@@ -1,4 +1,4 @@
-export const categories = [
+export const categoriesOptions = [
   {
     genre: "Fiction",
     subgenres: ["Fantasy", "Romance", "Thrillers", "Adventure"],

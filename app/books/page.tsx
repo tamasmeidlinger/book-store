@@ -6,10 +6,11 @@ import { filterBooks } from "@/lib/queries";
 async function Products({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+  searchParams: Promise<Record<string, string | string[]>>;
 }) {
   const params = await searchParams;
-  const category = params.category ?? "%";
+  const raw = params.category;
+  const category = Array.isArray(raw) ? raw : raw ? [raw] : [];
   const books = await filterBooks(category);
   if (!books) {
     return <p>No books</p>;

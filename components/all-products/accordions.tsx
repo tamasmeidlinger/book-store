@@ -6,29 +6,33 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { categories } from "@/lib/filter-options";
+import { categoriesOptions } from "@/lib/filter-options";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 
 function FilterAccordions() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const activeCategory = searchParams.get("category") ?? "";
+  const categories = searchParams.getAll("category") ?? [];
 
   function handleCheckboxChange(subgenre: string, checked: boolean) {
     const params = new URLSearchParams(searchParams.toString());
 
     if (checked) {
-      params.set("category", subgenre); // only one allowed
+      if (!categories.includes(subgenre)) {
+        params.append("category", subgenre);
+      }
     } else {
-      params.delete("category"); // unselect all
+      const newCategories = categories.filter((c) => c !== subgenre);
+      params.delete("category");
+      newCategories.forEach((c) => params.append("category", c));
     }
 
     router.push(`?${params.toString()}`);
   }
   return (
     <Accordion type="multiple">
-      {categories.map((genre) => (
+      {categoriesOptions.map((genre) => (
         <AccordionItem value={genre.genre} key={genre.genre}>
           <AccordionTrigger className="px-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-lg mb-2">
             {genre.genre}
@@ -43,7 +47,7 @@ function FilterAccordions() {
                   <div className="w-full flex gap-3 items-center text-xl px-6 py-1">
                     <Checkbox
                       id={`toggle${subgenre}`}
-                      checked={activeCategory === subgenre}
+                      checked={categories.includes(subgenre)}
                       onCheckedChange={(checked) =>
                         handleCheckboxChange(subgenre, checked === true)
                       }

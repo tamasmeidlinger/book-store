@@ -86,29 +86,35 @@ interface FilteredBooks {
   id: string;
 }
 
-export async function filterBooks(category: string) {
-  try {
-    const filteredBooks = sql<FilteredBooks[]>`SELECT title.book_title AS title,
-author.name AS author,
-image.src AS image_src,
-book.id
-FROM book
-JOIN title
-ON title.id = book.title_id
-JOIN author
-ON author.id = book.author_id
-JOIN image
-ON image.id = book.image_id
-JOIN book_subgenre
-ON book_subgenre.book_id = book.id
-JOIN subgenre
-ON subgenre.id = book_subgenre.subgenre_id
-WHERE subgenre.name LIKE ${category};
-`;
-    return filteredBooks;
-  } catch {
-    return null;
+export async function filterBooks(categories: string[] | null) {
+  // ✅ If no category filter -> return all books
+  if (!categories || categories.length === 0) {
+    return sql<FilteredBooks[]>`
+      SELECT title.book_title AS title,
+             author.name AS author,
+             image.src AS image_src,
+             book.id
+      FROM book
+      JOIN title ON title.id = book.title_id
+      JOIN author ON author.id = book.author_id
+      JOIN image ON image.id = book.image_id;
+    `;
   }
+
+  // ✅ If some categories selected -> filter by them
+  return sql<FilteredBooks[]>`
+    SELECT title.book_title AS title,
+           author.name AS author,
+           image.src AS image_src,
+           book.id
+    FROM book
+    JOIN title ON title.id = book.title_id
+    JOIN author ON author.id = book.author_id
+    JOIN image ON image.id = book.image_id
+    JOIN book_subgenre ON book_subgenre.book_id = book.id
+    JOIN subgenre ON subgenre.id = book_subgenre.subgenre_id
+    WHERE subgenre.name = ANY(${categories});
+  `;
 }
 
 export { getBestSellers, getBook };
