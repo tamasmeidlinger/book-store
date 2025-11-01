@@ -14,7 +14,19 @@ async function getBestSellers(): Promise<BestSellerBooks[] | null> {
   try {
     const bestSellers = await sql<
       BestSellerBooks[]
-    >`SELECT title, author, image_src, id FROM books ORDER BY n_sales DESC LIMIT 10`;
+    >`SELECT title.book_title AS title,
+sales.n_sales, image.src AS image_src, author.name AS author, book.id
+FROM sales
+JOIN book
+ON book.id = sales.book_id
+JOIN title
+ON title.id = book.title_id
+JOIN image
+ON image.id = book.image_id
+JOIN author
+ON author.id = book.author_id
+ORDER BY n_sales DESC
+LIMIT 5`;
     return bestSellers;
   } catch (err) {
     console.error(err);
@@ -36,9 +48,30 @@ interface BookInfo {
 
 async function getBook(bookid: string) {
   try {
-    const book = await sql<
-      BookInfo[]
-    >`SELECT title, author, image_src, description, price, format, publisher, publication_date, pages FROM books WHERE id = ${bookid}`;
+    const book = await sql<BookInfo[]>`SELECT title.book_title AS title,
+author.name AS author,
+image.src AS image_src,
+descriptions.description AS description,
+book.price AS price,
+format.name AS format,
+publisher.name AS publisher,
+book.publication_date,
+book.pages
+FROM book
+INNER JOIN title
+ON title.id = book.title_id
+INNER JOIN author
+ON author.id = book.author_id
+INNER JOIN image
+ON image.id = book.image_id
+INNER JOIN descriptions
+ON descriptions.id = book.description_id
+INNER JOIN format
+ON format.id = book.format_id
+INNER JOIN publisher
+ON publisher.id = book.publisher_id
+WHERE book.id = ${bookid};
+`;
     return book[0];
   } catch (err) {
     console.error(err);
