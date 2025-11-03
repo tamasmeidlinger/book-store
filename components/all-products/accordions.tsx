@@ -15,6 +15,11 @@ function FilterAccordions() {
   const router = useRouter();
   const categories = searchParams.getAll("category") ?? [];
 
+  const genre = searchParams.get("genre") ?? "";
+  const categoriesFiltered = categoriesOptions.filter((o) =>
+    genre ? o.genre === genre : true
+  );
+
   function handleCheckboxChange(subgenre: string, checked: boolean) {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -32,7 +37,7 @@ function FilterAccordions() {
   }
   return (
     <Accordion type="multiple">
-      {categoriesOptions.map((genre) => (
+      {categoriesFiltered.map((genre) => (
         <AccordionItem value={genre.genre} key={genre.genre}>
           <AccordionTrigger className="px-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-lg mb-2">
             {genre.genre}

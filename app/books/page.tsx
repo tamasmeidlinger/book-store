@@ -9,9 +9,14 @@ async function Products({
   searchParams: Promise<Record<string, string | string[]>>;
 }) {
   const params = await searchParams;
+  console.log("🧩 genre:", params.genre);
+  console.log("🧩 category:", params.category);
+
+  const genreRaw = params.genre;
+  const genre = Array.isArray(genreRaw) ? genreRaw : genreRaw ? [genreRaw] : [];
   const raw = params.category;
   const category = Array.isArray(raw) ? raw : raw ? [raw] : [];
-  const books = await filterBooks(category);
+  const books = await filterBooks(category, genre);
   if (!books) {
     return <p>No books</p>;
   }

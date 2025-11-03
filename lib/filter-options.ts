@@ -1,10 +1,10 @@
 export const categoriesOptions = [
   {
     genre: "Fiction",
-    subgenres: ["Fantasy", "Romance", "Thrillers", "Adventure"],
+    subgenres: ["Fantasy", "Romance", "Thrillers", "Adventure", "Cooking"],
   },
   {
-    genre: "History",
-    subgenres: ["Europe", "United States", "Wars & Conflicts"],
+    genre: "Non-fiction",
+    subgenres: ["Cooking", "United States", "Wars & Conflicts"],
   },
 ];

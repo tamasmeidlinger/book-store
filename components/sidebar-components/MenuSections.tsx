@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/accordion";
 import { menuSections } from "@/lib/placeholder-data";
 import { Button } from "../ui/button";
+import Link from "next/link";
+import { SheetClose } from "../ui/sheet";
 
 export default function MenuSections() {
   return (
@@ -20,13 +22,16 @@ export default function MenuSections() {
           <AccordionContent>
             <div className="flex flex-col">
               {section.subsections.map((subs) => (
-                <Button
-                  className="justify-start pl-8"
-                  variant="ghost"
-                  key={subs.subsection}
-                >
-                  {subs.subsection}
-                </Button>
+                <SheetClose className="w-full" asChild key={subs.subsection}>
+                  <Link className="w-full" href={subs.subsectionUrl}>
+                    <Button
+                      className="justify-start pl-8 w-full"
+                      variant="ghost"
+                    >
+                      {subs.subsection}
+                    </Button>
+                  </Link>
+                </SheetClose>
               ))}
             </div>
           </AccordionContent>

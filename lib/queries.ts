@@ -86,9 +86,13 @@ interface FilteredBooks {
   id: string;
 }
 
-export async function filterBooks(categories: string[] | null) {
+export async function filterBooks(
+  categories: string[] | null,
+  genre: string | string[]
+) {
+  const genreId = genre.includes("Fiction") ? 1 : 2;
   // ✅ If no category filter -> return all books
-  if (!categories || categories.length === 0) {
+  if ((!categories || categories.length === 0) && genre.length === 0) {
     return sql<FilteredBooks[]>`
       SELECT title.book_title AS title,
              author.name AS author,
@@ -97,7 +101,37 @@ export async function filterBooks(categories: string[] | null) {
       FROM book
       JOIN title ON title.id = book.title_id
       JOIN author ON author.id = book.author_id
-      JOIN image ON image.id = book.image_id;
+      JOIN image ON image.id = book.image_id
+      
+      
+    `;
+  } else if (genre && categories?.length === 0) {
+    return sql<FilteredBooks[]>`
+      SELECT title.book_title AS title,
+             author.name AS author,
+             image.src AS image_src,
+             book.id
+      FROM book
+      JOIN title ON title.id = book.title_id
+      JOIN author ON author.id = book.author_id
+      JOIN image ON image.id = book.image_id
+      WHERE book.genre_id = ${genreId}
+      
+    `;
+  } else if (categories && genre.length === 0) {
+    return sql<FilteredBooks[]>`
+    SELECT title.book_title AS title,
+           author.name AS author,
+           image.src AS image_src,
+           book.id
+    FROM book
+    JOIN title ON title.id = book.title_id
+    JOIN author ON author.id = book.author_id
+    JOIN image ON image.id = book.image_id
+    JOIN book_subgenre ON book_subgenre.book_id = book.id
+    JOIN subgenre ON subgenre.id = book_subgenre.subgenre_id
+    WHERE subgenre.name = ANY(${categories})
+      
     `;
   }
 
@@ -113,7 +147,8 @@ export async function filterBooks(categories: string[] | null) {
     JOIN image ON image.id = book.image_id
     JOIN book_subgenre ON book_subgenre.book_id = book.id
     JOIN subgenre ON subgenre.id = book_subgenre.subgenre_id
-    WHERE subgenre.name = ANY(${categories});
+    WHERE subgenre.name = ANY(${categories})
+    AND book.genre_id = ${genreId}
   `;
 }
 

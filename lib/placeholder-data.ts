@@ -5,50 +5,12 @@ export const menuSections = [
 
     subsections: [
       {
-        subsection: "English books",
-        subsectionUrl: "#",
+        subsection: "Fiction",
+        subsectionUrl: "/books?genre=Fiction",
       },
       {
-        subsection: "Books in other languages",
-        subsectionUrl: "#",
-      },
-      {
-        subsection: "Mangas",
-        subsectionUrl: "#",
-      },
-    ],
-  },
-  {
-    section: "E-books",
-    sectionUrl: "#",
-
-    subsections: [
-      {
-        subsection: "English e-books",
-        subsectionUrl: "#",
-      },
-      {
-        subsection: "E-books in other languages",
-        subsectionUrl: "#",
-      },
-      {
-        subsection: "Mangas",
-        subsectionUrl: "#",
-      },
-    ],
-  },
-  {
-    section: "Audiobooks",
-    sectionUrl: "#",
-
-    subsections: [
-      {
-        subsection: "English audiobooks",
-        subsectionUrl: "#",
-      },
-      {
-        subsection: "Audiobooks in other languages",
-        subsectionUrl: "#",
+        subsection: "Non-fiction",
+        subsectionUrl: "/books?genre=Non-fiction",
       },
     ],
   },

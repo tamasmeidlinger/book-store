@@ -28,7 +28,6 @@ function AppSidebar() {
                 <SheetClose>BookStore</SheetClose>
               </Link>
             </SheetTitle>
-            <SheetClose />
           </SheetHeader>
           <MenuSections />
           <SheetFooter>
