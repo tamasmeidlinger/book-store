@@ -13,7 +13,7 @@ import { SheetClose } from "../ui/sheet";
 
 export default function MenuSections() {
   return (
-    <Accordion type="multiple">
+    <Accordion type="multiple" defaultValue={["Books"]}>
       {menuSections.map((section) => (
         <AccordionItem value={section.section} key={section.section}>
           <AccordionTrigger className="px-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-lg">
