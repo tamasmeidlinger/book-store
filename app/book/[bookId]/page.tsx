@@ -69,7 +69,9 @@ async function Book({ params }: BookPageProps) {
               Description
             </AccordionTrigger>
             <AccordionContent>
-              <p className="text-lg px-4 py-1">{book.description}</p>
+              <p className="text-lg px-4 py-1 whitespace-pre-line">
+                {book.description}
+              </p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="details">

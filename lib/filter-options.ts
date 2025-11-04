@@ -5,6 +5,6 @@ export const categoriesOptions = [
   },
   {
     genre: "Non-fiction",
-    subgenres: ["Cooking", "United States", "Wars & Conflicts"],
+    subgenres: ["Cooking", "History"],
   },
 ];
