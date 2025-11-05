@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import AppSidebar from "@/components/sidebar-components/AppSidebar";
-import { ShoppingCart, Heart, CircleUser } from "lucide-react";
 import Link from "next/link";
+import IconsBar from "@/components/fav-basket/icons-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,9 +45,7 @@ export default function RootLayout({
               </h1>
             </div>
             <div className="flex gap-5">
-              <Heart size={29} />
-              <ShoppingCart size={29} />
-              <CircleUser size={29} />
+              <IconsBar />
             </div>
           </header>
           {children}

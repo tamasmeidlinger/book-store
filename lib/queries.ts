@@ -34,7 +34,8 @@ LIMIT 5`;
   }
 }
 
-interface BookInfo {
+export interface BookInfo {
+  id: string;
   title: string;
   author: string;
   image_src: string;
@@ -48,7 +49,9 @@ interface BookInfo {
 
 async function getBook(bookid: string) {
   try {
-    const book = await sql<BookInfo[]>`SELECT title.book_title AS title,
+    const book = await sql<BookInfo[]>`SELECT
+    book.id,
+   title.book_title AS title,
 author.name AS author,
 image.src AS image_src,
 descriptions.description AS description,

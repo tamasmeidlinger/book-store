@@ -1,13 +1,12 @@
 import { getBook } from "@/lib/queries";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Plus, Bookmark } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import FbButtons from "@/components/fav-basket/fb-buttons";
 
 type BookPageProps = {
   params: Promise<{ bookId: string }>;
@@ -50,14 +49,7 @@ async function Book({ params }: BookPageProps) {
         {/* BUTTONS */}
         <div className="sm:order-3 order-4 flex justify-center sm:justify-start">
           <div className="flex flex-col gap-2 w-80 sm:w-full max-w-100">
-            <Button className="flex gap-2 text-md">
-              <Plus className="w-5! h-5!" />
-              Add To Basket
-            </Button>
-            <Button className="flex gap-2 text-md">
-              <Bookmark className="w-5! h-5!" />
-              Save For Later
-            </Button>
+            <FbButtons book={book} />
           </div>
         </div>
       </div>
