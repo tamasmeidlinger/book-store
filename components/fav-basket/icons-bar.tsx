@@ -30,7 +30,7 @@ function IconsBar() {
   return (
     <div className="flex gap-5">
       {/* Favorites */}
-      <Link href="/favorites" className="relative">
+      <Link href="/wishlist" className="relative">
         <Heart size={29} />
         {favoritesCount > 0 && (
           <Badge className="absolute -top-1 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums flex items-center justify-center">

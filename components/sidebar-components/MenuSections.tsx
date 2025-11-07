@@ -16,7 +16,7 @@ export default function MenuSections() {
     <Accordion type="multiple" defaultValue={["Books"]}>
       {menuSections.map((section) => (
         <AccordionItem value={section.section} key={section.section}>
-          <AccordionTrigger className="px-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-lg">
+          <AccordionTrigger className="px-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 text-xl">
             {section.section}
           </AccordionTrigger>
           <AccordionContent>
@@ -25,7 +25,7 @@ export default function MenuSections() {
                 <SheetClose className="w-full" asChild key={subs.subsection}>
                   <Link className="w-full" href={subs.subsectionUrl}>
                     <Button
-                      className="justify-start pl-8 w-full"
+                      className="justify-start pl-8 w-full text-lg"
                       variant="ghost"
                     >
                       {subs.subsection}
